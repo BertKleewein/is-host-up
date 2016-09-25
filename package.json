@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "jshint --show-non-errors .",
-    "unittest": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec test/_*_test.js",
+    "unittest": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec test.js",
     "test": "npm -s run lint && npm -s run unittest"
   },
   "repository": {
