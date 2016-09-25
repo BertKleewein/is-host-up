@@ -50,16 +50,17 @@ describe ('is-host-up', function() {
   });
 
   it ('calls nmap correctly', function(done) {
-    isHostUp('foo', function() {}, FakeSpawn);
+    isHostUp('foo',function() {}, FakeSpawn);
     assert(FakeSpawn.withArgs('nmap', ['-Pn', 'foo']).calledOnce);
     done();
   });
 
-  if ('calls done with error on error', function (done) {
+  it ('calls done with error on error', function (done) {
     isHostUp('foo', function(err) {
       assert.isDefined(err);
       done();
     }, FakeSpawn);
+    thisFakeNmap.stdout.emit('data','bar');
     thisFakeNmap.emit('error', 'foo');
   });
 
