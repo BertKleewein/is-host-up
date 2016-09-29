@@ -12,16 +12,25 @@ function isHostUp(ip, done, provider) {
 
   nmap.stdout.on('data', function(data) {
    if (data.toString('ascii').indexOf('(1 host up)') > -1) {
-    done(null,true);
+    if (done) {
+      done(null,true);
+      done = null;
+    }
    }
   });
 
   nmap.on('exit', function() {
-    done(null,false);
+    if (done) {
+      done(null,false);
+      done = null;
+    }
   });
 
   nmap.on('error', function() {
-    done(new Error('spawn error'));
+    if (done) {
+      done(new Error('spawn error'));
+      done = null;
+    }
   });
 
 }
